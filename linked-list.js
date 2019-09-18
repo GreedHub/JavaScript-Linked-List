@@ -14,6 +14,10 @@ class LinkedList {
         this.size = 1;
     }
 
+    listSize(){
+        return this.size;
+    }
+
     empty(){
         this.head = null;
         this.tail = null;
@@ -157,13 +161,15 @@ class LinkedList {
         }
 
     }
+
 }
 
 /* some random tests */
 let counter = 1;
 
 let lista = new LinkedList(counter);
-lista.deleteAtPosition(1);
-lista.insertAtPosition(1,12);
+for(let i = counter+1; i<=30; i++){
+    lista.insertAtEnd(i);
+}
 lista.logData();
-console.log(lista);
+
