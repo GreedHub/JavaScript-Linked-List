@@ -14,32 +14,30 @@ class LinkedList {
     }
 
     insertAtEnd (data){
-        let current;
 
-        if(this.head){
-            current = this.head;
+        if(!this.tail){
+            this.tail = new LinkedListNode(data);  
+            this.head = this.tail;          
+            return true;
         }
+
+        this.tail.next = new LinkedListNode(data);
+        this.tail.next.prev = this.tail;
+        this.tail = this.tail.next;
         
-        while(current.next){
-            current = current.next;
-        }
-
-        current.next = new LinkedListNode(data);
-
-        current.next.prev = current;
-        this.tail = current.next;
-
         return true;
 
     } 
 
     insertAtStart(data){
-        let current;
 
-        if(this.head){
-            current = this.head;
+        if(!this.head){
+            this.head = new LinkedListNode(data);
+            this.tail = this.head;
+            return true;
         }
 
+        let current = this.head;
         this.head = new LinkedListNode(data);
         this.head.next = current;
         this.head.next.prev = this.head;
@@ -48,11 +46,17 @@ class LinkedList {
     }
 
     insertAtPosition(position,data){
-        let current;
-
-        if(this.head){
-            current = this.head;
+        
+        if(!this.head){
+            if(position!=1){
+                throw `Position ${position} is out of range`;
+            }
+            this.head = new LinkedListNode(data);
+            this.tail = this.head;
+            return true;   
         }
+
+        let current = this.head;
         
         for(let i= 1; i<position-1;i++){
             
@@ -75,11 +79,12 @@ class LinkedList {
     }
 
     deleteAtPosition(position){
-        let current;
-
-        if(this.head){
-            current = this.head;
+        
+        if(!this.head){
+            throw `Empty list, nothing to delete`;
         }
+      
+         let current = this.head;
         
         for(let i= 1; i<position;i++){
             
@@ -98,6 +103,10 @@ class LinkedList {
                 this.head = null;
             }
         }
+
+        if(current===this.tail){
+            this.tail = null;
+        }
         
         if(current.prev){
             current.prev.next = current.next;
@@ -113,12 +122,12 @@ class LinkedList {
     }
 
     logData(){
-        let current;
 
-        if(this.head){
-            current = this.head;
+        if(!this.head){
+            throw "Empty list, nothing to log";
         }
 
+        let current = this.head;
         console.log(current.data);
         
         while(current.next){
@@ -133,14 +142,6 @@ class LinkedList {
 let counter = 1;
 
 let lista = new LinkedList(counter);
-counter++
-lista.insertAtEnd(counter);
-lista.insertAtStart(0);
-counter ++ ;
-lista.insertAtEnd(counter);
-
-lista.insertAtPosition(4,2.5);
-
-lista.deleteAtPosition(5);
-
+lista.deleteAtPosition(1);
+lista.insertAtPosition(1,12);
 lista.logData();
