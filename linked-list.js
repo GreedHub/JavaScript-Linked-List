@@ -162,6 +162,22 @@ class LinkedList {
 
     }
 
+    logInvertedData(){
+
+        if(this.isEmpty()){
+            throw "Empty list, nothing to log";
+        }
+
+        let current = this.tail;
+        console.log(current.data);
+        
+        while(current.prev){
+            current = current.prev;
+            console.log(current.data);
+        }
+
+    }
+
 }
 
 /* some random tests */
