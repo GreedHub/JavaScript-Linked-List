@@ -11,11 +11,13 @@ class LinkedList {
         this.head = new LinkedListNode;
         this.tail = this.head;
         this.head.data = data;
+        this.size = 1;
     }
 
     empty(){
         this.head = null;
         this.tail = null;
+        this.size = 0;
     }
 
     isEmpty(){
@@ -29,13 +31,15 @@ class LinkedList {
 
         if(this.isEmpty()){
             this.tail = new LinkedListNode(data);  
-            this.head = this.tail;          
+            this.head = this.tail; 
+            this.size++;         
             return true;
         }
 
         this.tail.next = new LinkedListNode(data);
         this.tail.next.prev = this.tail;
         this.tail = this.tail.next;
+        this.size++;
         
         return true;
 
@@ -46,6 +50,7 @@ class LinkedList {
         if(this.isEmpty()){
             this.head = new LinkedListNode(data);
             this.tail = this.head;
+            this.size++;
             return true;
         }
 
@@ -53,6 +58,7 @@ class LinkedList {
         this.head = new LinkedListNode(data);
         this.head.next = current;
         this.head.next.prev = this.head;
+        this.size++;
 
         return true;
     }
@@ -65,6 +71,7 @@ class LinkedList {
             }
             this.head = new LinkedListNode(data);
             this.tail = this.head;
+            this.size++;
             return true;   
         }
 
@@ -86,6 +93,7 @@ class LinkedList {
         }
         current.next = new_node;
         new_node.prev = current;
+        this.size++;
 
         return true;
     }
@@ -128,7 +136,8 @@ class LinkedList {
             current.next.prev = current.prev;
         }
         
-        current = undefined;
+        current = null;        
+        this.size--;
 
         return true;
     }
@@ -157,3 +166,4 @@ let lista = new LinkedList(counter);
 lista.deleteAtPosition(1);
 lista.insertAtPosition(1,12);
 lista.logData();
+console.log(lista);
