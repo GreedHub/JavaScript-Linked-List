@@ -13,9 +13,21 @@ class LinkedList {
         this.head.data = data;
     }
 
+    empty(){
+        this.head = null;
+        this.tail = null;
+    }
+
+    isEmpty(){
+        if (!this.head){
+            return true;
+        }
+        return false;
+    }
+
     insertAtEnd (data){
 
-        if(!this.tail){
+        if(this.isEmpty()){
             this.tail = new LinkedListNode(data);  
             this.head = this.tail;          
             return true;
@@ -31,7 +43,7 @@ class LinkedList {
 
     insertAtStart(data){
 
-        if(!this.head){
+        if(this.isEmpty()){
             this.head = new LinkedListNode(data);
             this.tail = this.head;
             return true;
@@ -47,7 +59,7 @@ class LinkedList {
 
     insertAtPosition(position,data){
         
-        if(!this.head){
+        if(this.isEmpty()){
             if(position!=1){
                 throw `Position ${position} is out of range`;
             }
@@ -80,7 +92,7 @@ class LinkedList {
 
     deleteAtPosition(position){
         
-        if(!this.head){
+        if(this.isEmpty()){
             throw `Empty list, nothing to delete`;
         }
       
@@ -123,7 +135,7 @@ class LinkedList {
 
     logData(){
 
-        if(!this.head){
+        if(this.isEmpty()){
             throw "Empty list, nothing to log";
         }
 
